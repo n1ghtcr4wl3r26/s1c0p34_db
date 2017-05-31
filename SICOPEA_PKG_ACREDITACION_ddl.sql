@@ -37,7 +37,9 @@ IS
                                   prm_tipoobs              IN VARCHAR2,
                                   prm_fecobs               IN VARCHAR2,
                                   prm_doc_identificacion   IN VARCHAR2,
-                                  prm_tipo_doc             IN VARCHAR2)
+                                  prm_tipo_doc             IN VARCHAR2,
+                                  prm_tipodiplomatico      IN VARCHAR2,
+                                  prm_proyecto             IN VARCHAR2)
         RETURN VARCHAR2;
 
     FUNCTION modifica_entidad (prm_cod_ent    IN VARCHAR2,
@@ -70,7 +72,9 @@ IS
                                   prm_usu_reg              IN VARCHAR2,
                                   prm_cod_ent              IN VARCHAR2,
                                   prm_doc_identificacion   IN VARCHAR2,
-                                  prm_tipo_doc             IN VARCHAR2)
+                                  prm_tipo_doc             IN VARCHAR2,
+                                  prm_tipodiplomatico      IN VARCHAR2,
+                                  prm_proyecto             IN VARCHAR2)
         RETURN VARCHAR2;
 
     FUNCTION registra_entidad (prm_cod_ent    IN VARCHAR2,
@@ -240,7 +244,9 @@ IS
                                   prm_tipoobs              IN VARCHAR2,
                                   prm_fecobs               IN VARCHAR2,
                                   prm_doc_identificacion   IN VARCHAR2,
-                                  prm_tipo_doc             IN VARCHAR2)
+                                  prm_tipo_doc             IN VARCHAR2,
+                                  prm_tipodiplomatico      IN VARCHAR2,
+                                  prm_proyecto             IN VARCHAR2)
         RETURN VARCHAR2
     IS
         res VARCHAR2 (50)
@@ -291,7 +297,9 @@ IS
                         TO_DATE (prm_fecobs, 'dd/mm/yyyy'),
                         prm_obs,
                         prm_doc_identificacion,
-                        prm_tipo_doc);
+                        prm_tipo_doc,
+                        prm_tipodiplomatico,
+                        prm_proyecto);
 
             COMMIT;
         END IF;
@@ -472,7 +480,9 @@ IS
                                   prm_usu_reg              IN VARCHAR2,
                                   prm_cod_ent              IN VARCHAR2,
                                   prm_doc_identificacion   IN VARCHAR2,
-                                  prm_tipo_doc             IN VARCHAR2)
+                                  prm_tipo_doc             IN VARCHAR2,
+                                  prm_tipodiplomatico      IN VARCHAR2,
+                                  prm_proyecto             IN VARCHAR2)
         RETURN VARCHAR2
     IS
         -- Enter the procedure variables here. As shown below
@@ -521,7 +531,9 @@ IS
                             NULL,
                             '',
                             prm_doc_identificacion,
-                            prm_tipo_doc);
+                            prm_tipo_doc,
+                            prm_tipodiplomatico,
+                            prm_proyecto);
 
                 COMMIT;
             ELSE
@@ -1038,7 +1050,9 @@ IS
                                  'Diplomatico', 'Diplom&aacute;tico',
                                  ac.doc_identificacion),
                          ' '),
-                     NVL (ac.tipo_doc, ' ')
+                     NVL (ac.tipo_doc, ' '),
+                     ac.tipo_diplomatico,
+                     ac.proyecto
               FROM   acreditacion ac
              WHERE       ac.cod_acred = prm_codacred
                      AND ac.ver = 0
