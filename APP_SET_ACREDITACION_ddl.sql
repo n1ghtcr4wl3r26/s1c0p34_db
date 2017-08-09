@@ -20,7 +20,10 @@ CREATE TABLE acreditacion
     doc_identificacion             VARCHAR2(30 BYTE),
     tipo_doc                       VARCHAR2(20 BYTE),
     tipo_diplomatico               VARCHAR2(50 BYTE),
-    proyecto                       VARCHAR2(150 BYTE))
+    proyecto                       VARCHAR2(150 BYTE),
+    nombres                        VARCHAR2(200 BYTE),
+    ap_paterno                     VARCHAR2(100 BYTE),
+    ap_materno                     VARCHAR2(100 BYTE))
   NOPARALLEL
   LOGGING
 /
